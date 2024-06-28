@@ -1,0 +1,58 @@
+import java.util.Scanner;
+
+public class CurrencyConverter {
+
+    public static double convert(double amount, String fromCurrency, String toCurrency) {
+        double convertedAmount = 0;
+        double conversionRate = 1;
+
+        // Define conversion rates
+        switch (fromCurrency) {
+            case "USD":
+                if (toCurrency.equals("EUR")) conversionRate = 0.88;
+                else if (toCurrency.equals("GBP")) conversionRate = 0.78;
+                else if (toCurrency.equals("INR")) conversionRate = 74.30;
+                break;
+            case "EUR":
+                if (toCurrency.equals("USD")) conversionRate = 1.14;
+                else if (toCurrency.equals("GBP")) conversionRate = 0.89;
+                else if (toCurrency.equals("INR")) conversionRate = 84.24;
+                break;
+            case "GBP":
+                if (toCurrency.equals("USD")) conversionRate = 1.28;
+                else if (toCurrency.equals("EUR")) conversionRate = 1.12;
+                else if (toCurrency.equals("INR")) conversionRate = 94.88;
+                break;
+            case "INR":
+                if (toCurrency.equals("USD")) conversionRate = 0.013;
+                else if (toCurrency.equals("EUR")) conversionRate = 0.012;
+                else if (toCurrency.equals("GBP")) conversionRate = 0.011;
+                break;
+            default:
+                System.out.println("Invalid currency");
+                return -1;
+        }
+
+        // Perform the conversion
+        convertedAmount = amount * conversionRate;
+        return convertedAmount;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Welcome to the Currency Converter");
+        System.out.print("Enter the amount: ");
+        double amount = scanner.nextDouble();
+        System.out.print("Enter the source currency (USD, EUR, GBP, INR): ");
+        String fromCurrency = scanner.next().toUpperCase();
+        System.out.print("Enter the target currency (USD, EUR, GBP, INR): ");
+        String toCurrency = scanner.next().toUpperCase();
+
+        double convertedAmount = convert(amount, fromCurrency, toCurrency);
+
+        if (convertedAmount != -1) {
+            System.out.println(amount + " " + fromCurrency + " is equal to " + convertedAmount + " " + toCurrency);
+        }
+    }
+}
